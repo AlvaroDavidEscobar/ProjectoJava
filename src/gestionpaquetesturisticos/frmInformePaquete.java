@@ -31,7 +31,7 @@ public class frmInformePaquete extends javax.swing.JFrame {
     }
     
     public void crearInforme(){
-        String sql = "select pa.nombre, concat(pa.ciudad, ', ', pa.pais) destino, pa.precio, pa.estado, group_concat(distinct em.nombre) asesor from paquetes pa left join ventas ve on pa.id_paquete = ve.paquete left join empleados em on ve.empleado = em.id_empleado group by pa.nombre";
+        String sql = "select pa.nombre, concat(pa.ciudad, ', ', pa.pais) destino, pa.precio, pa.estado, group_concat(distinct em.nombre order by em.nombre separator ', ') asesor from paquetes pa left join ventas ve on pa.id_paquete = ve.paquete left join empleados em on ve.empleado = em.id_empleado group by pa.id_paquete, pa.nombre,pa.ciudad, pa.pais, pa.precio, pa.estado";
         
         DefaultTableModel modeloTabla = (DefaultTableModel) tblInformesPaquetes.getModel();
         modeloTabla.setRowCount(0);
