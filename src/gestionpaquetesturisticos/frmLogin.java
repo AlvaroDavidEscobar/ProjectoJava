@@ -95,7 +95,7 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        String sql = "select * from empleados where usuario = ? and contrasena = ?";
+        String sql = "select tipo Tipo from empleados where usuario = ? and contrasena = ?";
 
         try (Connection conexion = Conexion.conectar();
             PreparedStatement statement = conexion.prepareStatement(sql)) {
@@ -106,8 +106,9 @@ public class frmLogin extends javax.swing.JFrame {
             ResultSet resultado = statement.executeQuery();
 
             if (resultado.next()) {
+                int tipoUsuario = resultado.getInt("Tipo");
                 System.out.println("login correcto");
-                frmPrincipal form = new frmPrincipal();
+                frmPrincipal form = new frmPrincipal(tipoUsuario);
                 this.dispose();
                 form.setVisible(true);
             } else {

@@ -4,6 +4,8 @@
  */
 package gestionpaquetesturisticos;
 
+import java.awt.Color;
+
 /**
  *
  * @author auxil
@@ -11,14 +13,30 @@ package gestionpaquetesturisticos;
 public class frmPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmPrincipal.class.getName());
-
-    /**
-     * Creates new form frmInformePaquete
-     */
-    public frmPrincipal() {
+    
+    int tipoUsuario;
+    
+    public frmPrincipal(int tipoUsuario) {
         initComponents();
+        this.tipoUsuario = tipoUsuario;
+        mostrarTipoDeUsuario();
     }
-
+    
+    private void mostrarTipoDeUsuario() { 
+        switch (tipoUsuario) {
+            case 1:
+                lbTipoUsuario.setText("Usuario es: ADMINISTRADOR");
+                break;
+            case 2:
+                lbTipoUsuario.setText("Usuario es: EMPLEADO");
+                break;
+            default:
+                lbTipoUsuario.setText("Usuario es: ERROR");
+                lbTipoUsuario.setForeground(Color.red);
+                break;
+        }
+    }      
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,6 +46,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbTipoUsuario = new javax.swing.JLabel();
         mbPrincipal = new javax.swing.JMenuBar();
         menuPaquetes = new javax.swing.JMenu();
         miInformesPaquetes = new javax.swing.JMenuItem();
@@ -36,6 +55,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuDestinos = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lbTipoUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTipoUsuario.setText("lbTipoUsuario");
 
         menuPaquetes.setText("Paquetes");
 
@@ -62,11 +84,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(509, Short.MAX_VALUE)
+                .addComponent(lbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(301, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,11 +139,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new frmPrincipal().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new frmPrincipal(0).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem InformesFecha;
+    private javax.swing.JLabel lbTipoUsuario;
     private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenu menuDestinos;
     private javax.swing.JMenu menuPaquetes;
