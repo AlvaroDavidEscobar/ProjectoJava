@@ -14,16 +14,18 @@ public class frmPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmPrincipal.class.getName());
     
-    int tipoUsuario;
+    int tipoEmpleado;
+    int idEmpleado;
     
-    public frmPrincipal(int tipoUsuario) {
+    public frmPrincipal(int tipoEmpleado, int idEmpleado) {
         initComponents();
-        this.tipoUsuario = tipoUsuario;
+        this.tipoEmpleado = tipoEmpleado;
+        this.idEmpleado = idEmpleado;
         mostrarTipoDeUsuario();
     }
     
     private void mostrarTipoDeUsuario() { 
-        switch (tipoUsuario) {
+        switch (tipoEmpleado) {
             case 1:
                 lbTipoUsuario.setText("Usuario es: ADMINISTRADOR");
                 break;
@@ -53,6 +55,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         miInformesIngresos = new javax.swing.JMenuItem();
         InformesFecha = new javax.swing.JMenuItem();
         menuDestinos = new javax.swing.JMenu();
+        menuVentas = new javax.swing.JMenu();
+        miAgregarVenta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +82,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuDestinos.setText("Destinos");
         mbPrincipal.add(menuDestinos);
 
+        menuVentas.setText("Ventas");
+
+        miAgregarVenta.setText("Agregar venta");
+        miAgregarVenta.addActionListener(this::miAgregarVentaActionPerformed);
+        menuVentas.add(miAgregarVenta);
+
+        mbPrincipal.add(menuVentas);
+
         setJMenuBar(mbPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,22 +112,27 @@ public class frmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void miInformesPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInformesPaquetesActionPerformed
-        
-        frmInformePaquete form = new frmInformePaquete();
+    private void InformesFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformesFechaActionPerformed
+        frmReservasPorPeriodo form = new frmReservasPorPeriodo();
         form.setVisible(true);
-        
-    }//GEN-LAST:event_miInformesPaquetesActionPerformed
+    }//GEN-LAST:event_InformesFechaActionPerformed
 
     private void miInformesIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInformesIngresosActionPerformed
         frmInformeIngresos form = new frmInformeIngresos();
         form.setVisible(true);
     }//GEN-LAST:event_miInformesIngresosActionPerformed
 
-    private void InformesFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformesFechaActionPerformed
-        frmReservasPorPeriodo form = new frmReservasPorPeriodo();
+    private void miInformesPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInformesPaquetesActionPerformed
+
+        frmInformePaquete form = new frmInformePaquete();
         form.setVisible(true);
-    }//GEN-LAST:event_InformesFechaActionPerformed
+
+    }//GEN-LAST:event_miInformesPaquetesActionPerformed
+
+    private void miAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgregarVentaActionPerformed
+        frmAgregarVenta form = new frmAgregarVenta(tipoEmpleado, idEmpleado);
+        form.setVisible(true);
+    }//GEN-LAST:event_miAgregarVentaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,7 +156,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new frmPrincipal(0).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new frmPrincipal(0, 0).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -148,6 +165,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar mbPrincipal;
     private javax.swing.JMenu menuDestinos;
     private javax.swing.JMenu menuPaquetes;
+    private javax.swing.JMenu menuVentas;
+    private javax.swing.JMenuItem miAgregarVenta;
     private javax.swing.JMenuItem miInformesIngresos;
     private javax.swing.JMenuItem miInformesPaquetes;
     // End of variables declaration//GEN-END:variables
